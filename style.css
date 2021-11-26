@@ -1,6 +1,7 @@
 :root {
   --main-color: #212121;
   --btn-color: rgb(239, 244, 253);
+  --mode: rgb(239, 244, 253);
 }
 
 * {
@@ -13,8 +14,8 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  background: rgb(239, 244, 253);
-  color: var(--maincolor);
+  background: var(--mode);
+  color: var(--main-color);
 }
 
 nav {
@@ -26,20 +27,24 @@ nav {
   justify-content: space-between;
 }
 
-nav ul li {
+nav .nav-links {
+  transition: 0.3s;
+}
+
+nav .nav-links li {
   display: inline-block;
   list-style: none;
   margin: 10px 20px;
 }
 
-nav ul li a {
+nav .nav-links li a {
   position: relative;
   text-decoration: none;
   color: var(--main-color);
   font-weight: bold;
 }
 
-nav ul li a::before {
+nav .nav-links li a::before {
   content: "";
   background: #ff9800;
   width: 0%;
@@ -52,20 +57,33 @@ nav ul li a::before {
   border-radius: 50%;
 }
 
-nav ul li a:hover:before {
+nav .nav-links li a:hover:before {
   width: 90%;
 }
 
-nav ul li a:hover {
+nav .nav-links li a:hover {
   color: #ff9800;
 }
 
-nav ul #btn {
+nav .nav-links #btn {
   background: var(--main-color);
   color: var(--btn-color);
   padding: 11px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+nav .burger {
+  display: none;
+  cursor: pointer;
+}
+
+nav .burger div {
+  width: 25px;
+  height: 2px;
+  background-color: var(--main-color);
+  margin: 5px;
+  transition: 0.3s;
 }
 
 .detail {
@@ -120,4 +138,73 @@ nav ul #btn {
 }
 .images:hover .girl {
   left: 45%;
+}
+
+@media screen and (max-width: 1024px) {
+  .images {
+    height: 65%;
+  }
+  nav .nav-links li {
+    margin: 11px 7px;
+  }
+}
+
+@media screen and (max-width: 782px) {
+  .logo {
+    width: 100px;
+  }
+  .images {
+    height: 45%;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  nav .nav-links {
+    position: absolute;
+    right: 0;
+    background-color: var(--mode);
+    top: 80px;
+    width: 50%;
+    height: calc(100% - 80px);
+    z-index: 1;
+    transform: translateX(100%);
+    box-shadow: 0px 0px 21px 0px #0000007d;
+    display: flex;
+    flex-direction: column;
+  }
+  nav .nav-links li {
+    display: block;
+    margin: 11px 7px;
+    text-align: center;
+    margin-top: 20%;
+  }
+  nav .nav-links li:last-child {
+    margin-top: auto;
+  }
+  nav .burger {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .images {
+    width: 10%;
+    height: 35%;
+  }
+}
+
+.nav-active {
+  transform: translateX(0%) !important;
+}
+
+.burger-toggle .line1 {
+  transform: rotate(-45deg) translate(-5px, 5px);
+}
+
+.burger-toggle .line2 {
+  opacity: 0;
+}
+
+.burger-toggle .line3 {
+  transform: rotate(45deg) translate(-5px, -5px);
 }
